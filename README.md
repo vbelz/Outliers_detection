@@ -26,8 +26,8 @@ The dataset being used in this project is available at [data demo outliers](http
 It contains 6 columns representing `rooms` (number of rooms), `garages` (number of garages), `useful_area` (area of the flat), `value` (price of the flat), `interior_quality` (interior quality of the flat), `time_on_market` (time needed to sell the flat). I introduced several anomalies in the 6 columns to demonstrate the effectiveness of the metodologies presented below.
 
 The code for this article is available on this [github repository](https://github.com/vbelz/Outliers_detection)
-including a jupyter notebook example for each of the sections (`Explore_outliers_per_column.ipynb`,
-`Explore_outliers_multi_columns.ipynb`, `Monitor_outliers_pandera.ipynb`  )
+including a jupyter notebook example for each of the sections (`./demo/Explore_outliers_per_column.ipynb`,
+`./demo/Explore_outliers_multi_columns.ipynb`, `./demo/Monitor_outliers_pandera.ipynb`  )
 
 ## Easily detect outliers column-wise with IQR
 
@@ -75,10 +75,26 @@ Isolation forest is an unsupervised learning algorithm for anomaly detection wor
 
 Isolation forest is a tree ensemble method built on the basis of decision trees. The algorithm recursively generates partitions by first randomly selecting a feature and then selecting a random split value between the minimum and maximum value of the selected feature. The process carries on until a single point is isolated or a specified maximum depth is reached. Once the algorithm runs through the whole data, it considers anomalies the data points which took fewer steps than others to be isolated (fewer splits were necessary to isolate them).
 
+For this project, I used the isolation forest implementation from `Scikit-Learn` library.
+After training, the `predict` method can be called to know  if a particular sample is an outlier or not.
+Normal samples are labelled 1 and outliers labelled -1.
+In order to visualize our high dimension data, PCA can be applied to the features to reduce the dimension of the data (according to the variance). We can then  plot the three first components highlighting in green normal data and red outliers. We can see that anomalies have the tendency to locate away from our main data. This is an useful way to QC the application of the isolation forest algorithm. The code to identify anomalies and generate the PCA plot can be found below (and more details are available in the [github repository](https://github.com/vbelz/Outliers_detection)).
+
 [Plot 3D PCA scatter plot](https://gist.github.com/vbelz/b26564b0b68bf271ed9cfc995f49828c)
 <img src="images/isolation_example.py.png" alt="isolation" title="isolation"/>
 
+In some cases, it might be useful to control your anomalies threshold, or the maximum quantity
+of data points that you would like to be considered as abnormal. To do so, it is useful to called
+the `score_samples` method in order to obtain an anomaly score for each point of your dataset.
+You can then display these scores in a boxplot (picture example below) in order to choose different thresholds. The lower the score, the more abnormal the data point will be. Choosing a lower threshold will allow to decrease the number of anomalous points to detect.
+
+
 <img src="images/boxplot_score.png" alt="boxplot score isolation" title="boxplot score isolation"/>
+
+You can even decide a percentage of your dataset you would like to be considered as anomalous. All these examples of behaviours are demonstrated in the jupyter notebook `./demo/Explore_outliers_multi_columns.ipynb`, using the functions created in `./demo/outliers_util.py`.
+We generated 3D PCA scatter plots for different anomaly thresholds to create the gif illustration.
+We can see that we can decide to be more or less conservative for our outliers detection.
+This is a very powerful tool to be used in your ML pipeline as the presence of anomalies in your dataset can disturb your model behaviour/performance. By automatically detecting and removing the most abnormal data points using isolation forest, you are likely to improve your overall model performance. In particular, if your production data contains a high number of samples (of high dimension), removing the 0.5% most anomalous (at almost no extra-cost) would be a good production practice.
 
 
 ## Monitor your data with pandera: a statistical data validation toolkit for pandas
