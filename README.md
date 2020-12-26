@@ -4,8 +4,8 @@
 ## Introduction
 
 <img src="images/will-myers-ku_ttDpqIVc-unsplash.jpg" alt="outliers intro" title="Outliers"/>
-*Photo by Will Myers from* [unsplash.com](https://unsplash.com)
-
+*Photo by Will Myers from*  [unsplash.com](https://unsplash.com)
+---
 
 Production data in ML projects are often polluted by anomalies also called outliers.
 These outliers might be due to an error in a process or simply be part of your dataset. It is important
@@ -30,8 +30,8 @@ including a jupyter notebook example for each of the sections (`Explore_outliers
 ## Easily detect outliers column-wise with IQR
 
 <img src="images/IQR.png" alt="IQR" title="IQR"/>
-*Photo by Jhguch from* [en.wikipedia](https://en.wikipedia.org/wiki/Interquartile_range)
-
+*Photo by Jhguch from*  [en.wikipedia](https://en.wikipedia.org/wiki/Interquartile_range)
+---
 
 The interquartile range (IQR) is a measure of statistical dispersion, being equal to the difference between 75th and 25th percentiles,
 or equivalently between upper and lower quartiles, IQR = Q3 − Q1.
