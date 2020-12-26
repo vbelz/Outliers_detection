@@ -4,6 +4,7 @@
 ## Introduction
 
 <img src="images/will-myers-ku_ttDpqIVc-unsplash.jpg" alt="outliers intro" title="Outliers"/>
+
 Photo by Will Myers from  [unsplash.com](https://unsplash.com)
 
 
@@ -31,6 +32,7 @@ including a jupyter notebook example for each of the sections (`Explore_outliers
 ## Easily detect outliers column-wise with IQR
 
 <img src="images/IQR.png" alt="IQR" title="IQR"/>
+
 Photo by Jhguch from  [en.wikipedia](https://en.wikipedia.org/wiki/Interquartile_range)
 
 
