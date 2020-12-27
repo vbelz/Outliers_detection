@@ -60,7 +60,7 @@ We can see that without the filtering the distributions are highly peaked, highl
 The plots after filtering are more representative of the true data distribution. Based on these plots and our knowledge of the data, we can decide what range of data would be acceptable for each column.
 
 For this example, we would not expect price outside of range 50 000 - 10 000 000 Reais, area outside range 20-850 m2, time on market outside of range
-0-400 days. We can perform this type of outlier EDA for each of our column. This will be useful to set up our business rules for each column in the
+0-400 days. We can perform this type of outliers EDA for each of our column. This will be useful to set up our business rules for each column in the
 section for outliers monitoring using pandera.
 
 
@@ -103,7 +103,7 @@ In production environments, databases are regularly updated and anomalies should
 
 Pandera provides a flexible and expressive data validation toolkit that helps users make statistical assertions about pandas data structures.
 
-Based on your knowledge of your data, you can easily use pandera to implement rules to check the type and the accepted range within your features. As an example below, we created some rules for our demo dataset. As we have seen in our outlier EDA, the column `useful_area` should be a float and we would not expect values outside the range 20-850m2.
+Based on your knowledge of your data, you can easily use pandera to implement rules to check the type and the accepted range within your features. As an example below, we created some rules for our demo dataset. As we have seen in our outliers EDA, the column `useful_area` should be a float and we would not expect values outside the range 20-850m2.
 Similarly, we created rules for the remaining columns `value` (price), `rooms`, `garages`, `time_on_market` and `interior_quality`. For example, the column `interior_quality` should contain integer values within 1, 2, 3, 4 or 5.
 Below, an example of how the code looks like for our demo dataset.
 
@@ -111,7 +111,7 @@ Below, an example of how the code looks like for our demo dataset.
 [Pandera code example](https://gist.github.com/vbelz/c8fd3bc85932ca0d9bfb270e985d9f91)
 <img src="images/Pandera_example.py.png" alt="pandera code" title="pandera code"/>
 
-After having defined the rules based on your dataset knowledge, you can regularly run your pandera code to identify new anomalies within your database.  If some new data points are not respecting the rule you defined, it will output some warning message highlighting the issues to be corrected. It is a powerful and easy way to ensure the data quality of your database at different time periods.
+After having defined the rules based on your dataset knowledge, you can regularly run your pandera code to identify new anomalies within your database.  If some new data points are not respecting the rules you defined, it will output some warning messages highlighting the issues to be corrected. It is a powerful and easy way to ensure the data quality of your database at different time periods.
 
 Below an example of how would be the output in the case where we did not removed outliers from our dataset.
 
