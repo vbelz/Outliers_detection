@@ -99,10 +99,34 @@ This is a very powerful tool to be used in your ML pipeline as the presence of a
 
 ## Monitor your data with pandera: a statistical data validation toolkit for pandas
 
+In production environments, databases are regularly updated and anomalies should be monitored. Now that we have seen techniques to detect and remove outliers from your production data, we are going to see how we can monitor regularly your database and perform statistical validation checks with [pandera](https://pandera.readthedocs.io/en/stable/).
+
+Pandera provides a flexible and expressive data validation toolkit that helps users make statistical assertions about pandas data structures.
+
+Based on your knowledge of your data, you can easily use pandera to implement rules to check the type and the accepted range within your features. As an example below, we created some rules for our demo dataset. As we have seen in our outlier EDA, the column `useful_area` should be a float and we would not expect values outside the range 20-850m2.
+Similarly, we created rules for the remaining columns `value` (price), `rooms`, `garages`, `time_on_market` and `interior_quality`. For example, the column `interior_quality` should contain integer values within 1, 2, 3, 4 or 5.
+Below, an example of how the code looks like for our demo dataset.
+
+
 [Pandera code example](https://gist.github.com/vbelz/c8fd3bc85932ca0d9bfb270e985d9f91)
 <img src="images/Pandera_example.py.png" alt="pandera code" title="pandera code"/>
 
+After having defined the rules based on your dataset knowledge, you can regularly run your pandera code to identify new anomalies within your database.  If some new data points are not respecting the rule you defined, it will output some warning message highlighting the issues to be corrected. It is a powerful and easy way to ensure the data quality of your database at different time periods.
+
+Below an example of how would be the output in the case where we did not removed outliers from our dataset.
+
 <img src="images/example_pandera.png" alt="pandera output" title="pandera output"/>
+
+## Conclusion
+
+We presented an approach to detect (and remove) outliers from your database.
+First, per column, IQR can be used to explore, identify and remove abnormal data points, using a distribution plot to QC if your distribution shape is affected or not by outliers.
+Second, from a multi-column perspective, we have seen how isolation forest can be used to automatically detect abnormal observations in the feature space. Removing these anomalies before the training of your model will improve the robustness of your ML pipeline.
+
+We then presented an approach to monitor your production data and detect new anomalies at different time periods. Pandera makes statistical data validation easy ensuring that your database is regularly free from anomalies.
+
+All these techniques contribute to ensure a better quality of your data, allowing you to be more productive by focusing on other areas of your ML pipeline.
+
 
 ## References
 
